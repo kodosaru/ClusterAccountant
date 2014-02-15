@@ -1,0 +1,320 @@
+<html>
+  <head>
+	<META content="text/html; charset=ISO-8859-1" http-equiv=Content-Type>
+	  <title>The Cluster Accountant</title>
+  		<link rel="stylesheet" href="cluster_accountant.css" type="text/css"> 
+	  
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart', 'table']});
+      
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+      
+      // Callback that creates and populates a data table, 
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+      // Create the data table for interval service units pie chart.
+      var data1 = new google.visualization.DataTable(
+        {
+        cols: [
+                {id: 'groupid', label: 'Group ID', type: 'string'},
+                {id: 'susum', label: 'Service Units', type: 'number'}
+              ],
+        rows: [
+                {c:[{'v': 'CAS'}, {'v': 0.00}]},
+                {c:[{'v': 'Turing'}, {'v': 95.44}]},
+                {c:[{'v': 'Guests'}, {'v': 8082.48}]},
+                {c:[{'v': 'Galton'}, {'v': 0.03}]},
+                {c:[{'v': 'Babbage'}, {'v': 0.00}]},
+                {c:[{'v': 'Dalton'}, {'v': 0.00}]},
+                {c:[{'v': 'Bell'}, {'v': 10634.31}]},
+                {c:[{'v': 'Darwin'}, {'v': 0.00}]},
+                {c:[{'v': 'IS&T'}, {'v': 0.00}]},
+                {c:[{'v': 'Koch'}, {'v': 0.00}]},
+                {c:[{'v': 'Abercrombie'}, {'v': 0.00}]},
+                {c:[{'v': 'Linnaeus'}, {'v': 0.00}]},
+                {c:[{'v': 'Lavoisier'}, {'v': 10.25}]},
+                {c:[{'v': 'Bauer'}, {'v': 0.00}]},
+                {c:[{'v': 'Physics'}, {'v': 37518.93}]},
+                {c:[{'v': 'SCV'}, {'v': 0.00}]},
+                {c:[{'v': 'Huygens'}, {'v': 4531.71}]},
+                {c:[{'v': 'Leibniz'}, {'v': 363.44}]},
+                {c:[{'v': 'Earth Sciences'}, {'v': 0.00}]},
+                {c:[{'v': 'Genomics'}, {'v': 0.00}]},
+                {c:[{'v': 'Pascal'}, {'v': 356.94}]},
+                {c:[{'v': 'Sagan'}, {'v': 3226.78}]},
+                {c:[{'v': 'Knyazikhin'}, {'v': 0.00}]},
+                {c:[{'v': 'Dietze'}, {'v': 0.00}]}
+              ]
+        }
+      )
+
+      // Create the data table for interval subscription table.
+      var data3 = new google.visualization.DataTable(
+        {
+        cols: [
+                {id: 'groupid', label: 'PI', type: 'string'},
+                {id: 'subscription', label: 'Subscription', type: 'string'},
+                {id: 'exempt', label: 'Exempt', type: 'boolean'}
+              ],
+        rows: [
+                {c:[{'v': 'Leibniz'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Bell'}, {'v': '118%'}, {'v': false}]},
+                {c:[{'v': 'Physics'}, {'v': '113%'}, {'v': false}]},
+                {c:[{'v': 'Guests'}, {'v': 'N/A'}, {'v': true}]},
+                {c:[{'v': 'Lavoisier'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Turing'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Pascal'}, {'v': '  3%'}, {'v': false}]},
+                {c:[{'v': 'Sagan'}, {'v': ' 36%'}, {'v': false}]},
+                {c:[{'v': 'Galton'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Darwin'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Huygens'}, {'v': '194%'}, {'v': false}]}
+              ]
+        }
+      )
+
+      // Create the data table for interval service units line chart.
+      var data5 = new google.visualization.DataTable(
+      {
+        cols: [
+                {id: 'geoutil', label: 'SEC %', type: 'number'},
+                {id: 'katanautil', label: 'PRI %', type: 'number'}
+              ],
+        rows: [
+                {c:[{'v': 8.9}, {'v': 40.4}]},
+                {c:[{'v': 3.3}, {'v': 15.1}]},
+                {c:[{'v': 53.8}, {'v': 19.6}]},
+                {c:[{'v': 1.8}, {'v': 19.1}]},
+                {c:[{'v': 8.1}, {'v': 25.3}]},
+                {c:[{'v': 8.2}, {'v': 33}]},
+                {c:[{'v': 15.9}, {'v': 23.9}]},
+                {c:[{'v': 10.9}, {'v': 31.1}]},
+                {c:[{'v': 6.3}, {'v': 37.1}]},
+                {c:[{'v': 8.1}, {'v': 20.9}]},
+                {c:[{'v': 5.9}, {'v': 20.1}]},
+                {c:[{'v': 13.3}, {'v': 29.8}]},
+                {c:[{'v': 52.3}, {'v': 25.1}]},
+                {c:[{'v': 4.9}, {'v': 13.6}]},
+                {c:[{'v': 63.8}, {'v': 27.1}]}
+              ]
+        }
+      )
+
+      var dataView5 = new google.visualization.DataView(data5);
+      dataView5.setColumns([{calc: function(data5, row) { return ''; }, type:'string'}, 0, 1]);
+
+      // Create the data table for previous period, service units pie chart.
+      var data2 = new google.visualization.DataTable(
+        {
+        cols: [
+                {id: 'groupid', label: 'Group ID', type: 'string'},
+                {id: 'susum', label: 'Service Units', type: 'number'}
+              ],
+        rows: [
+                {c:[{'v': 'CAS'}, {'v': 0.00}]},
+                {c:[{'v': 'Turing'}, {'v': 95.44}]},
+                {c:[{'v': 'Guests'}, {'v': 8544.33}]},
+                {c:[{'v': 'Galton'}, {'v': 247.72}]},
+                {c:[{'v': 'Babbage'}, {'v': 6923.46}]},
+                {c:[{'v': 'Dalton'}, {'v': 0.00}]},
+                {c:[{'v': 'Bell'}, {'v': 45408.33}]},
+                {c:[{'v': 'Darwin'}, {'v': 4.02}]},
+                {c:[{'v': 'IS&T'}, {'v': 0.00}]},
+                {c:[{'v': 'Koch'}, {'v': 0.00}]},
+                {c:[{'v': 'Abercrombie'}, {'v': 0.00}]},
+                {c:[{'v': 'Linnaeus'}, {'v': 811.76}]},
+                {c:[{'v': 'Lavoisier'}, {'v': 82.40}]},
+                {c:[{'v': 'Bauer'}, {'v': 0.00}]},
+                {c:[{'v': 'Physics'}, {'v': 479301.97}]},
+                {c:[{'v': 'SCV'}, {'v': 0.00}]},
+                {c:[{'v': 'Huygens'}, {'v': 103265.42}]},
+                {c:[{'v': 'Leibniz'}, {'v': 629.53}]},
+                {c:[{'v': 'Earth Sciences'}, {'v': 0.00}]},
+                {c:[{'v': 'Genomics'}, {'v': 215.14}]},
+                {c:[{'v': 'Pascal'}, {'v': 24454.27}]},
+                {c:[{'v': 'Sagan'}, {'v': 126742.30}]},
+                {c:[{'v': 'Knyazikhin'}, {'v': 0.00}]},
+                {c:[{'v': 'Dietze'}, {'v': 0.00}]}
+              ]
+        }
+      )
+
+      // Create the data table for previous period, subscription table.
+      var data4 = new google.visualization.DataTable(
+        {
+        cols: [
+                {id: 'groupid', label: 'PI', type: 'string'},
+                {id: 'subscription', label: 'Subscription', type: 'string'},
+                {id: 'exempt', label: 'Exempt', type: 'boolean'}
+              ],
+        rows: [
+                {c:[{'v': 'Leibniz'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Bell'}, {'v': ' 41%'}, {'v': false}]},
+                {c:[{'v': 'Genomics'}, {'v': 'N/A'}, {'v': true}]},
+                {c:[{'v': 'Physics'}, {'v': '117%'}, {'v': false}]},
+                {c:[{'v': 'Guests'}, {'v': 'N/A'}, {'v': true}]},
+                {c:[{'v': 'Lavoisier'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Turing'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Pascal'}, {'v': ' 18%'}, {'v': false}]},
+                {c:[{'v': 'Babbage'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Sagan'}, {'v': '115%'}, {'v': false}]},
+                {c:[{'v': 'Linnaeus'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Galton'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Darwin'}, {'v': 'Over'}, {'v': false}]},
+                {c:[{'v': 'Huygens'}, {'v': '360%'}, {'v': false}]}
+              ]
+        }
+      )
+
+      // Create the data table for previous period, service units line chart.
+      var data6 = new google.visualization.DataTable(
+      {
+        cols: [
+                {id: 'geoutil', label: 'SEC %', type: 'number'},
+                {id: 'katanautil', label: 'PRI %', type: 'number'}
+              ],
+        rows: [
+                {c:[{'v': 1.5}, {'v': 22.9}]},
+                {c:[{'v': 2.9}, {'v': 22.5}]},
+                {c:[{'v': 31.7}, {'v': 25.9}]},
+                {c:[{'v': 16.4}, {'v': 41.1}]},
+                {c:[{'v': 5}, {'v': 42.9}]},
+                {c:[{'v': 17.5}, {'v': 50.3}]},
+                {c:[{'v': 4.5}, {'v': 54.4}]},
+                {c:[{'v': 7.7}, {'v': 51.2}]},
+                {c:[{'v': 16.2}, {'v': 42.3}]},
+                {c:[{'v': 8.1}, {'v': 35.7}]},
+                {c:[{'v': 16.8}, {'v': 56.6}]},
+                {c:[{'v': 6.6}, {'v': 49.4}]},
+                {c:[{'v': 8}, {'v': 31.7}]},
+                {c:[{'v': 11.2}, {'v': 40.3}]},
+                {c:[{'v': 73.9}, {'v': 43.3}]},
+                {c:[{'v': 45.6}, {'v': 27.8}]},
+                {c:[{'v': 63.5}, {'v': 34.1}]},
+                {c:[{'v': 44}, {'v': 22.4}]},
+                {c:[{'v': 72.4}, {'v': 37.5}]},
+                {c:[{'v': 37.1}, {'v': 41.6}]},
+                {c:[{'v': 70.1}, {'v': 31.1}]},
+                {c:[{'v': 62.9}, {'v': 39.6}]},
+                {c:[{'v': 40.5}, {'v': 49.1}]},
+                {c:[{'v': 40.1}, {'v': 52.1}]},
+                {c:[{'v': 49.7}, {'v': 47.2}]},
+                {c:[{'v': 72}, {'v': 54.6}]},
+                {c:[{'v': 59.2}, {'v': 39.9}]},
+                {c:[{'v': 64.9}, {'v': 54}]},
+                {c:[{'v': 58.9}, {'v': 46.5}]},
+                {c:[{'v': 58.6}, {'v': 51.2}]},
+                {c:[{'v': 65.5}, {'v': 43.6}]},
+                {c:[{'v': 68.7}, {'v': 47.2}]},
+                {c:[{'v': 89.2}, {'v': 39}]},
+                {c:[{'v': 49.6}, {'v': 53.6}]},
+                {c:[{'v': 92.1}, {'v': 44.4}]},
+                {c:[{'v': 62.8}, {'v': 34.2}]},
+                {c:[{'v': 50.6}, {'v': 45}]},
+                {c:[{'v': 47.1}, {'v': 36.4}]},
+                {c:[{'v': 45.3}, {'v': 41.4}]},
+                {c:[{'v': 46.2}, {'v': 36.3}]},
+                {c:[{'v': 50.6}, {'v': 31}]},
+                {c:[{'v': 8}, {'v': 29.9}]},
+                {c:[{'v': 32.9}, {'v': 41.4}]},
+                {c:[{'v': 41.6}, {'v': 38.7}]},
+                {c:[{'v': 42.8}, {'v': 39}]},
+                {c:[{'v': 21}, {'v': 17.3}]},
+                {c:[{'v': 6.2}, {'v': 25.8}]},
+                {c:[{'v': 11.9}, {'v': 32.3}]},
+                {c:[{'v': 8.7}, {'v': 22.5}]},
+                {c:[{'v': 40.9}, {'v': 21.3}]}
+              ]
+        }
+      )
+
+      var dataView6 = new google.visualization.DataView(data6);
+      dataView6.setColumns([{calc: function(data6, row) { return ''; }, type:'string'}, 0, 1]);
+
+      // Set options for the service units pie chart.
+      var options1 = {'title':'Service Units by PI',
+'chartArea':{left:20,top:40,width:"85%",height:"100%"},
+                      'is3D': true,
+                      'width':400,
+                      'height':300};
+
+      // Set options for the service units pie chart.
+      var options2 = {'showRowNumber':false,
+                      'showRowNumber':false};
+
+      // Set options for the utilitzation line chart interval.
+      var options3 = {title:'Cluster Utilization',
+                      'chartArea':{left:40,top:40,width:"70%",height:"80%"},
+                      'width':450,
+                      'height':300};
+
+      // Instantiate and draw pie chart interval, passing in some options.
+      var chart1 = new google.visualization.PieChart(document.getElementById('cell1a'));
+      chart1.draw(data1, options1);
+
+      // Instantiate and draw pie chart previous period, passing in some options.
+      var chart2 = new google.visualization.PieChart(document.getElementById('cell1b'));
+      chart2.draw(data2, options1);
+
+      // Instantiate and draw table chart previous period,, passing in some options.
+      var table1 = new google.visualization.Table(document.getElementById('cell2a'));
+      table1.draw(data3, options2);
+
+      // Instantiate and draw table chart, passing in some options.
+      var table2 = new google.visualization.Table(document.getElementById('cell2b'));
+      table2.draw(data4, options2);
+
+      // Instantiate and draw line chart interval, passing in some options.
+      var chart3 = new google.visualization.AreaChart(document.getElementById('cell3a'));
+      chart3.draw(dataView5, options3);
+
+      // Instantiate and draw utilization line chart previous period, passing in some options.
+      var chart4 = new google.visualization.AreaChart(document.getElementById('cell3b'));
+      chart4.draw(dataView6, options3);
+
+    }
+    </script>
+  </head>
+
+  <body>
+
+
+	  
+    <!--Table that will hold the pie charts, subscription lists, and utilization graphs-->
+<TABLE CLASS="hdft" WIDTH="100%" CELLSPACING="0">
+      <TR><TH CLASS="tl">PI Usage, PI Subscription and Cluster Utilization</TH></TR>
+      <TR><TD CLASS="nv" ALIGN="CENTER">Project equals "any" and Client equals "any"</TD></TR>
+      <TR><TD CLASS="nv">[<a href="http://kodosaru.net/docs/report_explanation.html">Report Explanation</a>]</TD></TR>
+</table>
+
+    <table align="center">
+        <th>Period: 10/1/2012 to 10/31/2012</th>
+        <th>Year-To-Date: 1/1/2012 to 10/31/2012</th>
+      </tr>
+      <tr>
+        <td id="cell1a"></td>
+        <td id="cell1b"></td>
+      </tr>
+      <tr valign="top">
+        <td id="cell2a"></td>
+        <td id="cell2b"></td>
+      </tr>
+      <tr>
+        <td id="cell3a"></td>
+        <td id="cell3b"></td>
+      </tr>
+    </table>
+
+<table class="hdft" width="100%" cellspacing="0">
+    <tr><td class="nv">Generated: November 3, 2012 10:05:02 AM EDT</td></tr>
+	<tr><th class="tl">Cluster Accountant v1.0 - Kodosaru University</th></tr>
+</table>
+
+  </body>
+</html>
