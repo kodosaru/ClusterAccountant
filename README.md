@@ -34,7 +34,7 @@ The utilization graph credits the full usage for a job to the period when the jo
 
 The information for this report comes from the Oracle Grid Engine Manager&#39;s accounting records and from a standalone MySQL database managed by the College of Arts and Sciences. The application is written in Oracle JDK v7.1 Java. The graphs and tables are created utilizing Google's Chart Tools service. The report will be generated automatically monthly and sent to all principal investigators. 
 
-**Examples of how to run the Cluster Accountant from the command line: **
+**Examples of how to run the Cluster Accountant from the command line:**
 
 java -jar cluster_accountant.jar main  
 java -jar cluster_accountant.jar main -s 12/01/2011 -e 12/31/2011 -S 01/01/2011 -E 12/31/2011 -t html  
@@ -47,5 +47,6 @@ java -jar cluster_accountant.jar main -s 3/01/2012 -e 3/31/2012 -S 01/01/2012 -E
 java -jar cluster_accountant.jar main -x sge_root/default/common/accounting.2011  
 java -jar cluster_accountant.jar main -x sge_root/default/common/accounting.2012  
 java -jar cluster_accountant.jar main -x sge_root/default/common/accounting  
+
 
 **Happy Coding!**
